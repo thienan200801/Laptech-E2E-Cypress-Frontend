@@ -1,0 +1,51 @@
+.wrapper{
+    display: flex;
+flex-direction: row;
+align-items: flex-start;
+justify-content: flex-start;
+margin: 8px 8px;
+border-bottom: #ccc 1px solid;
+}
+
+.comment{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 8px 8px;
+    .comment-and-rating{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        margin: 0 8px;
+        p{
+            margin: 0;
+            font-weight: 450;
+            line-height: 16px;
+            word-break: break-word;
+            font: 14px Helvetica;
+        }
+    }
+
+    .react-reply{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0 8px;   
+    }
+}
+
+.like{
+    margin-right: 16px;
+    :hover{
+        cursor: pointer;
+    }
+}
+.reply{
+    :hover{
+        cursor: pointer;
+    }
+}

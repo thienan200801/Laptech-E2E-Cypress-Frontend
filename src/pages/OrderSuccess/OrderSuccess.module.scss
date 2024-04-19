@@ -1,0 +1,42 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: row;
+}
+
+.content{
+    display: flex;
+    flex: 3;
+    flex-direction: column;
+    border-radius: 4px;
+    
+}
+
+.title{
+    display: flex;
+    flex: 1;
+    background-color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 4px 4px;
+}
+
+.items{
+    display: flex;
+    flex: 1;
+    background-color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 4px 4px;
+}
+
+.ant-table table{
+    border-spacing: 0 80px;
+
+}
+  

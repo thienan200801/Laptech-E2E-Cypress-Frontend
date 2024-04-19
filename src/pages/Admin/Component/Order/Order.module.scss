@@ -1,0 +1,58 @@
+
+span{
+    font-weight: 500;
+}
+
+.container{
+    height: 200vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.add{
+    width: 150px;
+    height: 150px;
+    margin: 16px;
+    border: 1px dashed black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+    &:hover{
+        cursor: pointer;
+        border: 1px dashed blue;
+        color: blue;
+    }
+}
+
+.wrapper-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+
+.AiIcons{
+    font-size: 32px;
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.item-poper{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    font-weight: 600;
+    font-size: 18px;
+    border-bottom: 1px solid #dddde3;
+    margin: 0;
+    padding: 0 8px;
+    width: 140px;
+    height: 40px;
+    &:hover{
+        cursor: pointer;
+        background-color: #dddde3;
+    }
+}
