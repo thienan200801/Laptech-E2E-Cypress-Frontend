@@ -1,4 +1,4 @@
-describe.only("Cart page", () => {
+describe("Cart page", () => {
   it("As a user, I want to navigate to Cart when clicking on My cart button", () => {
     cy.visit("http://localhost:3000");
     cy.get("div")

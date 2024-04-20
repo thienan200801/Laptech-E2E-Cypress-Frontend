@@ -111,7 +111,7 @@ const Header = () => {
                             }}
                             size={28}
                           />
-                          <p className={cx("menu-item")}>{item.name}</p>
+                          <p className={cx("menu-item")} id="loginMgt">{item.name}</p>
                         </div>
                       );
                     })
