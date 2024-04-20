@@ -90,11 +90,12 @@ function Search() {
           <div className={cx("search-result")} tabIndex="-1" {...attrs}>
             {searchResult.map((result) => (
               <div
+                id="searchItemInfo"
                 key={result._id}
                 className={cx("wrapper")}
                 onClick={() => handleDetailProduct(result._id)}
               >
-                <div className={cx("info")}>
+                <div className={cx("info")} >
                   <img src={result.image} alt={result.name} width={"100px"} />
                   <div>
                     <p>{result.name}</p>

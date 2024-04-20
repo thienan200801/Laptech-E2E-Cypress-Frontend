@@ -106,7 +106,7 @@ const Register = () => {
     <div className={cx("container")}>
       <div className={cx("inner")}>
         <div className={cx("form-box-register")}>
-          <h2>Register</h2>
+          <h2 id="registerTitle">Register</h2>
           <div>
             {/* name */}
             <div className={cx("input-box")}>
@@ -119,6 +119,7 @@ const Register = () => {
                 onFocus={handleFocusName}
                 onBlur={handleBlurName}
                 onChange={handleChangeName}
+                id="registerUserName"
               />
               <label
                 style={{ top: isFocusedName || isValidName ? "0" : "24px" }}
@@ -137,6 +138,7 @@ const Register = () => {
                 onFocus={handleFocusEmail}
                 onBlur={handleBlurEmail}
                 onChange={handleChangeEmail}
+                id="registerEmail"
               />
               <label style={{ top: isFocused || isValid ? "0" : "24px" }}>
                 Email
@@ -153,6 +155,7 @@ const Register = () => {
                 onFocus={handleFocusPassword}
                 onBlur={handleBlurPassword}
                 onChange={handleChangePassword}
+                id="registerPassword"
               />
               <label
                 style={{ top: isFocusedPass || isValidPass ? "0" : "24px" }}
@@ -171,6 +174,7 @@ const Register = () => {
                 onFocus={handleFocusConfirmPassword}
                 onBlur={handleBlurConfirmPassword}
                 onChange={handleChangeConfirmPassword}
+                id="registerConfirmPassword"
               />
               <label
                 style={{
@@ -181,7 +185,7 @@ const Register = () => {
                 Password
               </label>
             </div>
-            <button onClick={handleRegister}>Register</button>
+            <button id="registerBtn" onClick={handleRegister}>Register</button>
             <div className={cx("register-login")}>
               <p>
                 Have an account? <span onClick={handleLogin}>Login</span>

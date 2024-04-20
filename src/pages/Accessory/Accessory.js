@@ -32,7 +32,7 @@ const Accessory = () => {
             <Swiper spaceBetween={10} slidesPerView={6}>
               {Data.map((item) => (
                 <SwiperSlide key={item.id}>
-                  <CardItem props={item} />
+                  <CardItem props={item}/>
                 </SwiperSlide>
               ))}
             </Swiper>

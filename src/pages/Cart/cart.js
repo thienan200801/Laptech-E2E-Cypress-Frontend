@@ -28,7 +28,7 @@ const Cart = () => {
       <h1 style={{ paddingBlock: "1rem" }}>Giỏ hàng</h1>
       <div className={cx("wrapper")}>
         <div className={cx("content")}>
-          <div className={cx("title")}>
+          <div className={cx("title")} id="cartItemInfoContainer">
             <p style={{ flex: 2 }}>Sản phẩm</p>
             <p style={{ flex: 1 }}>Đơn giá</p>
             <p style={{ flex: 1 }}>Số lượng</p>
@@ -37,7 +37,7 @@ const Cart = () => {
           </div>
           {cart.products.length !== 0 ? (
             cart.products?.map((item, index) => {
-              return <CardCart key={index} props={item} />;
+              return <CardCart key={index} props={item}/>;
             })
           ) : (
             <div className={cx("empty")}>
@@ -45,36 +45,36 @@ const Cart = () => {
             </div>
           )}
         </div>
-        <div className={cx("firm")}>
+        <div className={cx("firm")} id="cartInfoContainer">
           <div className={cx("price-content")}>
             <div className={cx("location")}>
-              <p>Địa chỉ: {user.address ? user.address : "empty"} </p>
+              <p id="cartAddress">Địa chỉ: {user.address ? user.address : "empty"} </p>
             </div>
             <div className={cx("phone")}>
-              <p>Số điện thoại: {user.phone ? user.phone : "empty"} </p>
+              <p id="cartPhoneNumber">Số điện thoại: {user.phone ? user.phone : "empty"} </p>
             </div>
-            <div className={cx("price-detail")}>
-              <lable className={cx("lable")}>
+            <div className={cx("price-detail")} id="priceDetails">
+              <lable className={cx("lable")} id="subTotal">
                 Tạm tính:
                 <lable>{numberFormat.format(cart?.cartTotal)}VNĐ</lable>
               </lable>
-              <lable className={cx("lable")}>
+              <lable className={cx("lable")} id="discount">
                 Giảm giá:
                 <lable>0 VNĐ</lable>
               </lable>
-              <lable className={cx("lable")}>
+              <lable className={cx("lable")} id="shippingFee">
                 Phí vận chuyển:
                 <lable>0 VNĐ</lable>
               </lable>
             </div>
-            <div className={cx("price-total")}>
+            <div className={cx("price-total")} id="total">
               <p>Tổng cộng:</p>
               <p className={cx("total")}>
                 {numberFormat.format(cart?.cartTotal)}VNĐ
               </p>
             </div>
           </div>
-          <div className={cx("button-buy")}>
+          <div className={cx("button-buy")} id="payAmount">
             <button onClick={handlePayment}>Thanh toán</button>
           </div>
         </div>

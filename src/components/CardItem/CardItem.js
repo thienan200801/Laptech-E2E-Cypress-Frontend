@@ -16,7 +16,7 @@ const CardItem = ({ props }) => {
   const numberFormat = new Intl.NumberFormat("en-US");
 
   return (
-    <div className={cx("wrapper")}>
+    <div className={cx("wrapper")} id="cartItem">
       <div
         key={props._id}
         className={cx("image")}

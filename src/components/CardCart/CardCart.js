@@ -69,7 +69,7 @@ const CardCart = ({ props }) => {
   };
 
   return (
-    <div className={cx("container")}>
+    <div className={cx("container")} id="checkoutItem">
       <div className={cx("wrapper")}>
         <div className={cx("product")}>
           <div className={cx("image")}>
@@ -86,6 +86,7 @@ const CardCart = ({ props }) => {
         <div className={cx("quantity")}>
           <div className={cx("wrapper-quantity")}>
             <button
+              id="cartDecreaseBtn"
               onClick={() =>
                 handleChangeCount(
                   "decrease",
@@ -97,8 +98,9 @@ const CardCart = ({ props }) => {
             >
               -
             </button>
-            <p>{amount}</p>
+            <p id="cartAmount">{amount}</p>
             <button
+              id="cartIncreaseBtn"
               onClick={() =>
                 handleChangeCount(
                   "increase",
