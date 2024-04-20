@@ -493,7 +493,7 @@ const Product = () => {
                       });
                     }}
                   >
-                    <p>{item.name}</p>
+                    <p id="itemName">{item.name}</p>
                   </div>
                 ))}
                 {/* Add option to add a new Company */}

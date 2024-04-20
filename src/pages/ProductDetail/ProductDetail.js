@@ -189,14 +189,15 @@ const ProductDetail = () => {
           <div className={cx("quantity")}>
             <p>Số lượng</p>
             <div className={cx("quantity-wrapper")}>
-              <button onClick={handleDown}>-</button>
+              <button id="increaseBtn" onClick={handleDown}>-</button>
               <p>{quantity}</p>
-              <button onClick={handleUp}>+</button>
+              <button id="decreaseBtn" onClick={handleUp}>+</button>
             </div>
           </div>
 
           <div className={cx("buy")} onClick={handleBuy}>
             <p
+            id="buyNowBtn"
               style={{
                 color: "#fff",
                 fontSize: "24px",

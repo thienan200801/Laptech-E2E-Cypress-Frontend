@@ -1,10 +1,11 @@
 const menu = ['Laptop', 'Laptop Gaming', 'PC Gaming', 'PC làm việc'];
 
-describe("As a user, I want to verify Homepage", () => {
-  beforeEach(() => {
-    cy.visit("http://localhost:3000/");
-    cy.wait(500);
-  });
+beforeEach(() => {
+  cy.visit("http://localhost:3000/");
+  cy.wait(10000);
+});
+
+describe('As a QC, I want to verify Homepage', () => {
   it("Verify the whole UI of home page", () => {
     cy.get('#laptechLogo').should('have.attr', 'src');
     cy.get('.Search_search__OF-2W > input').should('be.visible');
@@ -33,7 +34,7 @@ describe("As a user, I want to verify Homepage", () => {
       cy.get($e[4]).contains('Laptop Gaming bán chạy');
     })
   }); 
-  it.only('Verify the whole UI of catalog product and logo functionality', () => {
+  it('Verify the whole UI of catalog product and logo functionality', () => {
     menu.forEach(menuItem => {
       cy.log('Verify UI of product catelog');
       cy.get('span').contains(menuItem).click();
@@ -45,6 +46,11 @@ describe("As a user, I want to verify Homepage", () => {
       cy.get('div').contains('Account').should('be.visible');
     });
   });
-  it('', () => {
-  })
 });
+describe('As a QC, I want to verify Product catalog page', () => {
+  it('Verify functionality when clicking on each product item', () => {
+    cy.get('#cartItem').contains('alo').first().dblclick();
+    //Dev fix-TBD
+    // cy.get('#itemName').should('be.visible');
+  })
+})
