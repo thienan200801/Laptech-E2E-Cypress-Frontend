@@ -6,7 +6,7 @@ describe('Registration page navigation', () => {
         cy.get('#registerTitle').should('be.visible');
     })   
 });
-describe.only('Registration page UI and functionality', () => {
+describe('Registration page UI and functionality', () => {
     beforeEach(() => {
         cy.visit("http://localhost:3000/register");
     });
