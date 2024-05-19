@@ -71,7 +71,34 @@ const Laptop = () => {
         <div className={cx("content-laptop")}>
           <p>Laptop ASUS</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalLaptopASUS.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />
@@ -84,7 +111,34 @@ const Laptop = () => {
         <div className={cx("content-laptop")}>
           <p>Laptop ACER</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalLaptopACER.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />
@@ -97,7 +151,34 @@ const Laptop = () => {
         <div className={cx("content-laptop")}>
           <p>Laptop LENOVO</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalLaptopLENOVO.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />
@@ -110,7 +191,34 @@ const Laptop = () => {
         <div className={cx("content-laptop")}>
           <p>Laptop MSI</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalLaptopMSI.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />
@@ -123,7 +231,34 @@ const Laptop = () => {
         <div className={cx("content-laptop")}>
           <p>Laptop DELL</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalLaptopDELL.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />

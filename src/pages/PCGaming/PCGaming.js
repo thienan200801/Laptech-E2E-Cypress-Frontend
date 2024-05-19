@@ -33,14 +33,7 @@ const PCGaming = () => {
     };
 
     fetchData();
-    console.log("PData:", PData);
   }, []);
-
-  useEffect(() => {
-    console.log("Rerendered!");
-  }, [PData]);
-
-  console.log("data products: ", PData);
 
   const NormalPc = PData.filter((index) => {
     return index.type === "gaming-PC";
@@ -52,7 +45,34 @@ const PCGaming = () => {
         <div className={cx("content-pcgaming")}>
           <p>PC Gaming giá tốt</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalPc.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />
@@ -65,7 +85,34 @@ const PCGaming = () => {
         <div className={cx("content-pcgaming")}>
           <p>PC Gaming chiến game mượt</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalPc.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />
@@ -78,7 +125,34 @@ const PCGaming = () => {
         <div className={cx("content-pcgaming")}>
           <p>PC Gaming cao cấp</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalPc.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />

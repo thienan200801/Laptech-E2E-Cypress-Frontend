@@ -51,7 +51,34 @@ const PCNormal = () => {
         <div className={cx("content-pcgaming")}>
           <p>Pc Gaming bán chạy</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalPc.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />
@@ -63,7 +90,34 @@ const PCNormal = () => {
         <div className={cx("content-laptop")}>
           <p>Laptop bán chạy</p>
           <div className={cx("items-wrapper")}>
-            <Swiper spaceBetween={10} slidesPerView={6}>
+            <Swiper
+              slidesPerView={6}
+              spaceBetween={15}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+
+                590: {
+                  slidesPerView: 1,
+                },
+                840: {
+                  slidesPerView: 2,
+                },
+                1090: {
+                  slidesPerView: 3,
+                },
+                1340: {
+                  slidesPerView: 4,
+                },
+                1590: {
+                  slidesPerView: 5,
+                },
+                1840: {
+                  slidesPerView: 6,
+                },
+              }}
+            >
               {NormalPc.map((item) => (
                 <SwiperSlide key={item.id}>
                   <CardItem props={item} />
