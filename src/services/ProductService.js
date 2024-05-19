@@ -1,6 +1,8 @@
 import axios from "axios";
 import { axiosJWT } from "./UserService";
 
+const endpoint = "http://localhost:3000/api";
+
 export const getAllProduct = async () => {
   const res = await axios.get(
     `${process.env.REACT_APP_API_URL}/product/get-all`
@@ -26,8 +28,9 @@ export const createProduct = async (data) => {
 };
 
 export const getDetailsProduct = async (id) => {
+  console.log(id, "id");
   const res = await axios.get(
-    `${process.env.REACT_APP_API_URL}/product/get-details/${id}`
+    `http://localhost:5000/api/product/get-details/${id}`
   );
   return res.data;
 };

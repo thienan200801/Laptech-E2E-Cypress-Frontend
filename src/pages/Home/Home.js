@@ -1,3 +1,4 @@
+// Home.js
 import React, { useEffect, useState } from "react";
 import styles from "./Home.module.scss";
 import classNames from "classnames/bind";
@@ -15,20 +16,20 @@ import { useDispatch, useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
 
+export const fetchProductAll = async () => {
+  try {
+    const res = await ProductService.getAllProduct();
+    console.log("Data fetched:", res);
+    return res;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
 const Home = () => {
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
-  const fetchProductAll = async () => {
-    try {
-      const res = await ProductService.getAllProduct();
-      console.log("Data fetched:", res);
-      return res;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
