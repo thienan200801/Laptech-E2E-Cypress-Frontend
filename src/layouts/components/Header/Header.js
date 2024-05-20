@@ -49,7 +49,13 @@ const Header = () => {
     <header className={cx("wrapper")}>
       <div className={cx("inner")}>
         <Link className={cx("logo")} to={config.routes.home}>
-          <img id="laptechLogo" src={lapTech_logo_3} alt="tiki-logo" width="72" height="72" />
+          <img
+            id="laptechLogo"
+            src={lapTech_logo_3}
+            alt="tiki-logo"
+            width="72"
+            height="72"
+          />
         </Link>
         <Search />
         <div className={cx("actions")}>
@@ -111,7 +117,9 @@ const Header = () => {
                             }}
                             size={28}
                           />
-                          <p className={cx("menu-item")} id="loginMgt">{item.name}</p>
+                          <p className={cx("menu-item")} id="loginMgt">
+                            {item.name}
+                          </p>
                         </div>
                       );
                     })
@@ -147,7 +155,7 @@ const Header = () => {
           </div>
           <div className={cx("cart")} onClick={handleCart}>
             <div>
-              {cart.products.length ? (
+              {cart.products?.length ? (
                 <label
                   style={{
                     position: "absolute",

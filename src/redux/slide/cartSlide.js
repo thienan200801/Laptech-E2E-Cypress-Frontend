@@ -19,7 +19,7 @@ export const cartSlide = createSlice({
         alreadyExists.amount += cartItem?.amount;
       } else {
         state.products.push(cartItem);
-        state.cartTotal += cartItem.price * cartItem.amount;
+        state.cartTotal += cartItem.price * cartItem?.amount;
         state.orderby = action.payload.user.user;
       }
     },
@@ -63,21 +63,23 @@ export const cartSlide = createSlice({
 
     removeCartProduct: (state, action) => {
       const { idProduct } = action.payload;
+
       const removedProduct = state?.products?.filter(
-        (item) => item?.product === idProduct
+        (item) => item?._id === idProduct
       );
 
       const itemsCart = state?.products?.filter(
-        (item) => item?.product !== idProduct
+        (item) => item?._id !== idProduct
       );
 
       state.cartTotal -= removedProduct[0].price * removedProduct[0].amount;
       state.products = itemsCart;
     },
     setCartProduct: (state, action) => {
-      console.log("action.payload: ", action.payload);
-      state.products = action.payload.products;
-      state.cartTotal = action.payload.cartTotal;
+      console.log("action.payload.products: ", action.payload?.products);
+      state.products = action.payload?.products;
+      state.cartTotal = action.payload?.cartTotal;
+      state.orderby = action.payload?.orderby;
     },
     resetState: () => initialState,
   },

@@ -43,7 +43,7 @@ const CardCart = ({ props }) => {
     if (user?.id) {
       UserSerVice.updateUserCart(
         user?.id,
-        props?.product,
+        props?._id,
         amount + 1,
         user?.access_token
       );
@@ -55,7 +55,7 @@ const CardCart = ({ props }) => {
     if (user?.id) {
       UserSerVice.updateUserCart(
         user?.id,
-        props?.product,
+        props?._id,
         amount - 1,
         user?.access_token
       );
@@ -63,9 +63,17 @@ const CardCart = ({ props }) => {
       recurseDecrease();
     }
   };
-  const handleDeleteProductinCart = (id, idProduct) => {
-    dispatch(removeCartProduct({ idProduct }));
-    UserSerVice.deleteUserCart(id, idProduct, user?.access_token);
+  const handleDeleteProductinCart = async (id, idProduct) => {
+    const res = await UserSerVice.deleteUserCart(
+      id,
+      idProduct,
+      user?.access_token
+    );
+    console.log(res, "res");
+    if (res.status === "OK") {
+      alert("Xóa sản phẩm thành công");
+      dispatch(removeCartProduct({ idProduct }));
+    }
   };
 
   return (
@@ -90,7 +98,7 @@ const CardCart = ({ props }) => {
               onClick={() =>
                 handleChangeCount(
                   "decrease",
-                  props?.product,
+                  props?._id,
 
                   props?.amount === 1
                 )
@@ -102,11 +110,7 @@ const CardCart = ({ props }) => {
             <button
               id="cartIncreaseBtn"
               onClick={() =>
-                handleChangeCount(
-                  "increase",
-                  props?.product,
-                  props?.amount === 50
-                )
+                handleChangeCount("increase", props?._id, props?.amount === 50)
               }
             >
               +
@@ -118,7 +122,7 @@ const CardCart = ({ props }) => {
           <AiOutlineDelete
             size="2rem"
             color="red"
-            onClick={() => handleDeleteProductinCart(user?.id, props?.product)}
+            onClick={() => handleDeleteProductinCart(user?.id, props?._id)}
           />
         </div>
       </div>

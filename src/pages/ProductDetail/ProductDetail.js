@@ -28,7 +28,7 @@ const ProductDetail = () => {
   const location = useLocation();
   const { id } = useParams();
   const mutation = useMutationHook((cartData) =>
-    UserService.addUserCart(user.id, cartData, user.token)
+    UserService.addUserCart(user.id, cartData, user.access_token)
   );
 
   const numberFormat = new Intl.NumberFormat("en-US");
@@ -96,7 +96,7 @@ const ProductDetail = () => {
         dispatch(
           addtoCart({
             products: {
-              product: detailProduct._id,
+              _id: detailProduct._id,
               name: detailProduct.name,
               image: detailProduct.image,
               price: detailProduct.price,
@@ -136,7 +136,6 @@ const ProductDetail = () => {
     };
     fetchData();
   }, []);
-  console.log(comment, "comment");
   return (
     <div className={cx("container")}>
       <div className={cx("container-content")}>
