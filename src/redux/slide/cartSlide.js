@@ -12,7 +12,6 @@ export const cartSlide = createSlice({
   reducers: {
     addtoCart: (state, action) => {
       const cartItem = action.payload.product;
-      console.log("cartItem: ", cartItem);
       const alreadyExists = state?.products?.find(
         (item) => item?._id === cartItem._id
       );
@@ -40,16 +39,18 @@ export const cartSlide = createSlice({
     removeCartProduct: (state, action) => {
       const { idProduct } = action.payload;
 
-      const removedProduct = state?.products?.filter(
-        (item) => item?._id === idProduct
+      // Tìm sản phẩm cần xóa
+      const productIndex = state.products.findIndex(
+        (item) => item._id === idProduct
       );
 
-      const itemsCart = state?.products?.filter(
-        (item) => item?._id !== idProduct
-      );
-
-      state.cartTotal -= removedProduct[0].price * removedProduct[0].amount;
-      state.products = itemsCart;
+      if (productIndex !== -1) {
+        const removedProduct = state.products[productIndex];
+        // Giảm số lượng và cập nhật tổng giá
+        state.cartTotal -= removedProduct.price * removedProduct.amount;
+        // Loại bỏ sản phẩm từ danh sách
+        state.products.splice(productIndex, 1);
+      }
     },
     setCartProduct: (state, action) => {
       console.log("action.payload.products: ", action.payload?.products);
