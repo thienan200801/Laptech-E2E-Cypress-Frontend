@@ -95,7 +95,7 @@ const ProductDetail = () => {
         mutation.mutate(cart);
         dispatch(
           addtoCart({
-            products: {
+            product: {
               _id: detailProduct._id,
               name: detailProduct.name,
               image: detailProduct.image,

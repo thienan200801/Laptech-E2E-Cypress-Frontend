@@ -75,7 +75,6 @@ export const updateUser = async (id, data, access_token) => {
 };
 
 export const addUserCart = async (id, cartData, access_token) => {
-  console.log("addUserCart", cartData);
   const res = await axiosJWT.post(
     `http://localhost:5000/api/user/cart-user/${id}`,
     cartData,
