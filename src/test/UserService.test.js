@@ -8,7 +8,38 @@ import {
   deleteUserCart,
   getAllUser,
   updateUserCart,
+  deleteUser,
+  refreshToken,
+  updateUser,
+  postCommentAndRating,
 } from "../services/UserService";
+
+describe("refreshToken", () => {
+  it("should refresh token is successfully", async () => {
+    const data = {
+      email: "test@gmail.com",
+      password: "123",
+    };
+    const result = await loginUser(data);
+    if (result.status === "OK") {
+      const data = await refreshToken(result.refresh_token);
+      expect(data.status).toEqual("OK");
+      expect(data.message).toEqual("SUCESS");
+    }
+  });
+
+  it("should refresh token is failed", async () => {
+    const data = {
+      email: "test@gmail.com",
+      password: "123",
+    };
+    const result = await loginUser(data);
+    if (result.status === "OK") {
+      const data = await refreshToken();
+      expect(data.status).toEqual("ERR");
+    }
+  });
+});
 
 describe("loginUser", () => {
   it("should login failed in case email is empty", async () => {
@@ -67,8 +98,6 @@ describe("loginUser", () => {
   });
 });
 
-// Path: src/test/UserService.test.js
-
 describe("registerUser", () => {
   function generateRandomString(length) {
     const characters =
@@ -80,18 +109,18 @@ describe("registerUser", () => {
 
   const randomString = generateRandomString(4);
 
-  // it("should register successfully", async () => {
-  //   const data = {
-  //     name: randomString,
-  //     email: `${randomString}TQK@gmail.com`,
-  //     password: "123",
-  //     confirmPassword: "123",
-  //     phone: "0389346149",
-  //   };
-  //   const result = await registerUser(data);
-  //
-  //   expect(result.status).toEqual("OK");
-  // });
+  it("should register successfully", async () => {
+    const data = {
+      name: randomString,
+      email: `${randomString}TQK@gmail.com`,
+      password: "123",
+      confirmPassword: "123",
+      phone: "0389346149",
+    };
+    const result = await registerUser(data);
+
+    expect(result.status).toEqual("OK");
+  });
 
   it("should register failed in case email already exist", async () => {
     const data = {
@@ -317,26 +346,79 @@ describe("updateUserCart", () => {
   });
 });
 
-// describe("deleteUserCart", () => {
-//   it("should delete a product in user cart successfully", async () => {
-//     const idProduct = "664b7ad5087a3670af5e75c1";
-//     const resultLogin = await loginUser({
-//       email: "test@gmail.com",
-//       password: "123",
-//     });
-//     if (resultLogin.status === "OK") {
-//       const result = await deleteUserCart(
-//         resultLogin.data._id,
-//         idProduct,
-//         resultLogin.access_token
-//       );
-//       if (result) {
-//         console.log("result.data", result);
-//         expect(result.status).toEqual("OK");
-//       }
-//     }
-//   });
-// });
+describe("deleteUser", () => {
+  it("should delete a user successfully", async () => {
+    function generateRandomString(length) {
+      const characters =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      return Array.from({ length }, () =>
+        characters.charAt(Math.floor(Math.random() * characters.length))
+      ).join("");
+    }
+
+    const randomString = generateRandomString(4);
+
+    const data = {
+      name: randomString,
+      email: `${randomString}TQK@gmail.com`,
+      password: "123",
+      confirmPassword: "123",
+      phone: "0389346149",
+    };
+    const resultRegister = await registerUser(data);
+    if (resultRegister.status === "OK") {
+      const UserId = resultRegister.data._id;
+      const resultLogin = await loginUser({
+        email: "Admin@gmail.com",
+        password: "123",
+      });
+      if (resultLogin.status === "OK") {
+        console.log("resultLogin", resultLogin.access_token);
+        const result = await deleteUser(
+          UserId,
+          resultLogin.access_token,
+          "removeUser"
+        );
+        if (result) {
+          console.log("result.data", result);
+          expect(result.status).toEqual("OK");
+        }
+      }
+    }
+  });
+});
+
+describe("deleteUserCart", () => {
+  it("should delete a product in user cart successfully", async () => {
+    const cartData = {
+      _id: "661966f05ffdc229d25dd781",
+      amount: 1,
+    };
+    const resultLogin = await loginUser({
+      email: "test@gmail.com",
+      password: "123",
+    });
+    if (resultLogin.status === "OK") {
+      const result = await addUserCart(
+        resultLogin.data._id,
+        cartData,
+        resultLogin.access_token
+      );
+      if (result.status === "OK") {
+        console.log("result.data", result);
+        const resultDelete = await deleteUserCart(
+          resultLogin.data._id,
+          "661966f05ffdc229d25dd781",
+          resultLogin.access_token
+        );
+        if (resultDelete) {
+          console.log("result.data", result);
+          expect(result.status).toEqual("OK");
+        }
+      }
+    }
+  });
+});
 
 describe("getAll", () => {
   it("should fetch user successfully", async () => {
@@ -369,13 +451,23 @@ describe("getAll", () => {
 });
 
 describe("updateUser", () => {
-  it("should fetch user cart successfully", async () => {
+  it("should update user cart successfully", async () => {
     const resultLogin = await loginUser({
-      email: "Admin@gmail.com",
+      email: "test@gmail.com",
       password: "123",
     });
+
+    const data = {
+      name: "TQK DEPZAI quaaa",
+    };
+
     if (resultLogin.status === "OK") {
-      const result = await getAllUser(resultLogin.access_token);
+      const result = await updateUser(
+        resultLogin.data._id,
+        data,
+        resultLogin.access_token
+      );
+      console.log("result", result);
       if (result) {
         expect(result.status).toEqual("OK");
       }

@@ -28,7 +28,6 @@ export const getDetailsUser = async (id, access_token) => {
 export const deleteUser = async (id, access_token, data) => {
   const res = await axiosJWT.delete(
     `http://localhost:5000/api/user/delete-user/${id}`,
-    data,
     {
       headers: {
         token: `Bearer ${access_token}`,
@@ -47,11 +46,16 @@ export const getAllUser = async (access_token) => {
   return res.data;
 };
 
-export const refreshToken = async () => {
-  console.log("refreshToken", refreshToken);
-  const res = await axios.post(`http://localhost:5000/api/user/refresh-token`, {
-    withCredentials: true,
-  });
+export const refreshToken = async (refresh_token) => {
+  const res = await axios.post(
+    `http://localhost:5000/api/user/refresh-token`,
+    {
+      refresh_token,
+    },
+    {
+      withCredentials: true,
+    }
+  );
   return res.data;
 };
 
@@ -114,9 +118,6 @@ export const updateUserCart = async (id, idProduct, amount, access_token) => {
 };
 
 export const deleteUserCart = async (id, idProduct, access_token) => {
-  console.log(id, "id");
-  console.log(idProduct, "idProduct");
-  console.log(access_token, "access_token");
   const res = await axiosJWT.delete(
     `http://localhost:5000/api/user/delete-cart-user/${id}/${idProduct}`,
 
@@ -133,18 +134,6 @@ export const deleteAllUserCart = async (id, access_token) => {
   const res = await axiosJWT.delete(
     `http://localhost:5000/api/user/delete-all-cart-user/${id}`,
 
-    {
-      headers: {
-        token: `Bearer ${access_token}`,
-      },
-    }
-  );
-  return res.data;
-};
-export const deleteManyUser = async (data, access_token) => {
-  const res = await axiosJWT.post(
-    `http://localhost:5000/api/user/delete-many`,
-    data,
     {
       headers: {
         token: `Bearer ${access_token}`,

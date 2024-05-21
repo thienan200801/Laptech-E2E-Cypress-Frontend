@@ -2,34 +2,28 @@ import React, { useEffect, useState } from "react";
 import styles from "./User.module.scss";
 import classNames from "classnames/bind";
 import * as UserService from "../../../../services/UserService";
-
+import { useDispatch, useSelector } from "react-redux";
 const cx = classNames.bind(styles);
 
 const User = () => {
   const [Data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  console.log("Usee:", user);
 
   //Fetch ALL data
-  const fetchUserAll = async () => {
-    try {
-      const res = await UserService.getAllUser();
-      console.log("Data fetched all user:", res);
-      return res;
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAllUser = async () => {
       try {
-        const result = await fetchUserAll();
-        setData(result.data);
+        const res = await UserService.getAllUser(user.access_token);
+        setData(res.data);
+        return res;
       } catch (error) {
-        console.log("error", error);
+        console.error("Error fetching data:", error);
       }
     };
-
-    fetchData();
-    console.log("Data:", Data);
+    fetchAllUser();
   }, []);
 
   return (
