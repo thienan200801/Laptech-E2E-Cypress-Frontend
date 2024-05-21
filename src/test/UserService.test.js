@@ -12,6 +12,7 @@ import {
   refreshToken,
   updateUser,
   postCommentAndRating,
+  deleteAllUserCart,
 } from "../services/UserService";
 
 describe("refreshToken", () => {
@@ -275,7 +276,6 @@ describe("addUserCart", () => {
   });
 
   it("should add user cart failed in case id is not exits", async () => {
-    //the id is not exits
     const cartData = {
       _id: "661966f05ffdc229d25dd780",
       amount: 1,
@@ -470,6 +470,61 @@ describe("updateUser", () => {
       console.log("result", result);
       if (result) {
         expect(result.status).toEqual("OK");
+      }
+    }
+  });
+});
+
+describe("postComment", () => {
+  it("should post successfully", async () => {
+    const data = {
+      email: "test@gmail.com",
+      password: "123",
+    };
+    const result = await loginUser(data);
+
+    if (result.status === "OK") {
+      const commentData = {
+        userId: result.data._id,
+        productId: "656b2f924a7494aad73e1c10",
+        comment: "This is a test comment tester",
+        rating: 5,
+      };
+      const resultPost = await postCommentAndRating(
+        result.data._id,
+        commentData,
+        result.access_token
+      );
+      expect(resultPost.success).toEqual(true);
+    }
+  });
+});
+
+describe("deleteAllUserCart", () => {
+  it("should delete a product in user cart successfully", async () => {
+    const cartData = {
+      _id: "661966f05ffdc229d25dd781",
+      amount: 1,
+    };
+    const resultLogin = await loginUser({
+      email: "test@gmail.com",
+      password: "123",
+    });
+    if (resultLogin.status === "OK") {
+      const result = await addUserCart(
+        resultLogin.data._id,
+        cartData,
+        resultLogin.access_token
+      );
+      if (result.status === "OK") {
+        const resultDelete = await deleteAllUserCart(
+          resultLogin.data._id,
+          resultLogin.access_token
+        );
+        if (resultDelete) {
+          console.log("result.data here", result);
+          expect(result.status).toEqual("OK");
+        }
       }
     }
   });

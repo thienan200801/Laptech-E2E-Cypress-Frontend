@@ -51,7 +51,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "jest": "jest",
-    "testUser": "jest UserService.test.js"
+    "testUser": "jest UserService.test.js",
+    "testProduct": "jest ProductService.test.js",
+    "testOrder": "jest OrderService.test.js"
   },
   "eslintConfig": {
     "extends": [

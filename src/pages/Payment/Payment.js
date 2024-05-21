@@ -79,13 +79,22 @@ const Payment = () => {
   }, [province]);
 
   useEffect(() => {
+    console.log(isSuccess, "isSuccess");
+    console.log(isSuccess, "isSuccess");
+    console.log(mutationAddOrder.data, "mutationAddOrder.data");
     if (isSuccess && mutationAddOrder.data.status === "OK") {
       alert("Đặt hàng thành công");
       dispatch(resetState());
       UserService.deleteAllUserCart(user?.id, user?.access_token);
       navigate("/ordersuccess");
     }
-  }, [isSuccess]);
+    if (isSuccess && mutationAddOrder.data.status === "ERR") {
+      alert("Sản phẩm đã hết hàng");
+      //dispatch(resetState());
+      //UserService.deleteAllUserCart(user?.id, user?.access_token);
+      //navigate("/ordersuccess");
+    }
+  }, [isSuccess, mutationAddOrder.data]);
 
   const handleDeliveryMethodChange = (selectedMethod) => {
     setDeliveryMethod(selectedMethod);

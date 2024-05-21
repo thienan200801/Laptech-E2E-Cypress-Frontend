@@ -19,25 +19,24 @@ describe("fetchAllProduct", () => {
     expect(result.status).toEqual("OK");
   });
 });
-import { loginUser, getUserCart } from "../services/UserService";
 
-// describe("fetchProductDetails", () => {
-//   it("should fetch data successfully", async () => {
-//     const result = await getDetailsProduct("656b2f924a7494aad73e1c10");
-//     console.log(result, "result");
+describe("fetchProductDetails", () => {
+  it("should fetch data successfully", async () => {
+    const result = await getDetailsProduct("656b2f924a7494aad73e1c10");
+    console.log(result, "result");
 
-//     // Kiểm tra rằng result.data tồn tại và là một mảng
-//     expect(result).toHaveProperty("data");
-//     console.log(Array.isArray(result.data)); // Thêm logging để kiểm tra
-//     expect(Array.isArray(result.data)).toBe(false);
-//   });
-//   it("should have the correct status and message", async () => {
-//     const result = await getDetailsProduct("656b2f924a7494aad73e1c10");
+    // Kiểm tra rằng result.data tồn tại và là một mảng
+    expect(result).toHaveProperty("data");
+    console.log(Array.isArray(result.data)); // Thêm logging để kiểm tra
+    expect(Array.isArray(result.data)).toBe(false);
+  });
+  it("should have the correct status and message", async () => {
+    const result = await getDetailsProduct("656b2f924a7494aad73e1c10");
 
-//     expect(result).toHaveProperty("status", "OK");
-//     expect(result).toHaveProperty("message", "SUCESS");
-//   });
-// });
+    expect(result).toHaveProperty("status", "OK");
+    expect(result).toHaveProperty("message", "SUCESS");
+  });
+});
 
 // describe("fetchgetAllProduct", () => {
 //   it("should have the correct status and message", async () => {
@@ -61,7 +60,6 @@ import { loginUser, getUserCart } from "../services/UserService";
 
 //   });
 // });
-
 
 // describe("getUserCart", () => {
 //   it("should fetch user cart successfully", async () => {
