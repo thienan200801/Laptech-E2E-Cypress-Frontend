@@ -35,7 +35,8 @@ const Home = () => {
       try {
         //fetch all products
         const result = await fetchProductAll();
-        setProducts(result.data);
+        console.log("result", result?.data);
+        setProducts(result?.data);
       } catch (error) {
         console.log("error", error);
       }
@@ -44,9 +45,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (user?.id && user?.cart?.cartTotal) {
+    if (user?.id) {
       UserService.getUserCart(user?.id, user?.access_token).then((res) => {
-        dispatch(setCartProduct(res));
+        console.log("Cart data fetched:", res.data);
+        dispatch(setCartProduct(res.data));
       });
     }
   }, [user?.id]);
@@ -57,7 +59,7 @@ const Home = () => {
         <MySlider />
       </div>
       {!products ? null : (
-        <div className={cx("content")} id="contentHotProduct">
+        <div className={cx("content")}>
           <div className={cx("content-hot-product")}>
             <p style={{ fontSize: "22px", color: "red" }}>Sản phẩm nổi bật</p>
             <div className={cx("items-wrapper")}>

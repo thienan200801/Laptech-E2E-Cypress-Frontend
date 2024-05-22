@@ -11,73 +11,52 @@ export const cartSlide = createSlice({
   initialState,
   reducers: {
     addtoCart: (state, action) => {
-      const cartItem = action.payload.products;
+      const cartItem = action.payload.product;
       const alreadyExists = state?.products?.find(
-        (item) => item?.product === cartItem.product
+        (item) => item?._id === cartItem._id
       );
       if (alreadyExists) {
         alreadyExists.amount += cartItem?.amount;
       } else {
         state.products.push(cartItem);
-        state.cartTotal += cartItem.price * cartItem.amount;
+        state.cartTotal += cartItem.price * cartItem?.amount;
         state.orderby = action.payload.user.user;
       }
     },
     increaseAmount: (state, action) => {
       const idProduct = action.payload;
-      const itemCart = state?.products?.find(
-        (item) => item?.product === idProduct
-      );
+      const itemCart = state?.products?.find((item) => item?._id === idProduct);
       itemCart.amount++;
       state.cartTotal += itemCart.price;
     },
     decreaseAmount: (state, action) => {
       const idProduct = action.payload;
-      const itemCart = state?.products?.find(
-        (item) => item?.product === idProduct
-      );
+      const itemCart = state?.products?.find((item) => item?._id === idProduct);
       itemCart.amount--;
       state.cartTotal -= itemCart.price;
     },
-    // removeCartProduct: (state, action) => {
-    //   const { idProduct } = action.payload;
-
-    //   const removedProduct = state?.products?.filter(
-    //     (item) => item?.product !== idProduct
-    //   );
-
-    //   if (removedProduct && removedProduct.length > 0) {
-    //     const productArray = removedProduct.map((proxy) => ({ ...proxy })); // Chuyển đổi Proxy thành object
-    //     const removedProductId = removedProduct[0].id;
-    //     console.log("Removed Product Id: ", removedProductId);
-    //     console.log("Removed Product Info: ", productArray);
-
-    //     state.products = state.products.filter(
-    //       (item) => item?.product !== idProduct
-    //     );
-
-    //     // Thực hiện các hành động khác với productArray
-    //     // Ví dụ: state.cartTotal -= productArray[0].price * productArray[0].amount;
-    //   }
-    // },
 
     removeCartProduct: (state, action) => {
       const { idProduct } = action.payload;
-      const removedProduct = state?.products?.filter(
-        (item) => item?.product === idProduct
+
+      // Tìm sản phẩm cần xóa
+      const productIndex = state.products.findIndex(
+        (item) => item._id === idProduct
       );
 
-      const itemsCart = state?.products?.filter(
-        (item) => item?.product !== idProduct
-      );
-
-      state.cartTotal -= removedProduct[0].price * removedProduct[0].amount;
-      state.products = itemsCart;
+      if (productIndex !== -1) {
+        const removedProduct = state.products[productIndex];
+        // Giảm số lượng và cập nhật tổng giá
+        state.cartTotal -= removedProduct.price * removedProduct.amount;
+        // Loại bỏ sản phẩm từ danh sách
+        state.products.splice(productIndex, 1);
+      }
     },
     setCartProduct: (state, action) => {
-      console.log("action.payload: ", action.payload);
-      state.products = action.payload.products;
-      state.cartTotal = action.payload.cartTotal;
+      console.log("action.payload.products: ", action.payload?.products);
+      state.products = action.payload?.products;
+      state.cartTotal = action.payload?.cartTotal;
+      state.orderby = action.payload?.orderby;
     },
     resetState: () => initialState,
   },

@@ -9,7 +9,7 @@ export const apiGetPublicProvinces = () =>
       });
       resolve(response);
     } catch (error) {
-      reject(error);
+      //reject(error);
     }
   });
 
@@ -22,6 +22,6 @@ export const apiGetPublicDistricts = (provinceId) =>
       });
       resolve(response);
     } catch (error) {
-      reject(error);
+      //reject(error);
     }
   });

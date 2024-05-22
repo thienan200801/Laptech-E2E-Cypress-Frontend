@@ -60,9 +60,16 @@ const App = () => {
   const handleGetDetailsUser = async (id, token) => {
     const storage = localStorage.getItem("refresh_token");
     const refreshToken = JSON.parse(storage);
-    const res = await UserService.getDetailsUser(id, token);
-    dispatch(updateUser({ ...res?.data, access_token: token, refreshToken }));
-    console.log("res", res);
+    try {
+      const res = await UserService.getDetailsUser(id, token);
+      if (res.status === "OK") {
+        dispatch(
+          updateUser({ ...res?.data, access_token: token, refreshToken })
+        );
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
   };
   return (
     <Router>

@@ -8,6 +8,7 @@ import { getBase64 } from "../../../../utils";
 import { Modal, Table } from "antd";
 import { Upload } from "antd";
 import useSelection from "antd/es/table/hooks/useSelection";
+import { useSelector } from "react-redux";
 
 const cx = classNames.bind(styles);
 
@@ -42,20 +43,21 @@ const Product = () => {
     image: "",
   });
   const user = useSelection((state) => state?.user);
+  const access_token = useSelector((state) => state.user?.access_token);
   const numberFormat = new Intl.NumberFormat("en-US");
 
   const mutation = useMutationHook((data) =>
-    ProductService.createProduct(data)
+    ProductService.createProduct(data, access_token)
   );
   const mutationUpdate = useMutationHook((data) => {
     const { id, token, ...rests } = data;
-    const res = ProductService.updateProduct(id, token, { ...rests });
+    const res = ProductService.updateProduct(id, access_token, { ...rests });
     return res;
   });
 
   const mutationDeleted = useMutationHook((data) => {
     const { id, token } = data;
-    const res = ProductService.deleteProduct(id, token);
+    const res = ProductService.deleteProduct(id, access_token);
     return res;
   });
   const columns = [

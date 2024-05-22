@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./CardCart.module.scss";
 import classNames from "classnames/bind";
 import { AiOutlineDelete } from "react-icons/ai";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   decreaseAmount,
   increaseAmount,
@@ -19,53 +18,62 @@ const CardCart = ({ props }) => {
   const user = useSelector((state) => state.user);
   const [amount, setAmount] = useState(props?.amount);
   const [price, setPrice] = useState(props?.price * props?.amount);
+
+  useEffect(() => {
+    setAmount(props?.amount);
+    setPrice(props?.price * props?.amount);
+  }, [props]);
+
   const handleChangeCount = async (type, idProduct, limited) => {
-    if (type === "increase") {
-      if (!limited) {
-        setAmount(amount + 1);
-        setPrice(price + props?.price);
-        recurseIncrease();
+    if (type === "increase" && !limited) {
+      try {
+        const newAmount = amount + 1;
+        setAmount(newAmount);
+        setPrice(newAmount * props?.price);
+        UserSerVice.updateUserCart(
+          user?.id,
+          idProduct,
+          newAmount,
+          user?.access_token
+        );
+
         dispatch(increaseAmount(idProduct));
+      } catch (error) {
+        console.error("Failed to increase amount", error);
       }
-    } else {
-      if (amount > 1) {
-        setAmount(amount - 1);
-        setPrice(price - props?.price);
-        recurseDecrease();
+    } else if (type === "decrease" && amount > 1) {
+      try {
+        const newAmount = amount - 1;
+        setAmount(newAmount);
+        setPrice(newAmount * props?.price);
+        UserSerVice.updateUserCart(
+          user?.id,
+          idProduct,
+          newAmount,
+          user?.access_token
+        );
+
         dispatch(decreaseAmount(idProduct));
-      } else if (amount === 1) {
-        setAmount(1);
+      } catch (error) {
+        console.error("Failed to decrease amount", error);
       }
     }
   };
 
-  const recurseIncrease = () => {
-    if (user?.id) {
-      UserSerVice.updateUserCart(
-        user?.id,
-        props?.product,
-        amount + 1,
+  const handleDeleteProductinCart = async (id, idProduct) => {
+    try {
+      const res = await UserSerVice.deleteUserCart(
+        id,
+        idProduct,
         user?.access_token
       );
-    } else {
-      recurseIncrease();
+      if (res.status === "OK") {
+        alert("Xóa sản phẩm thành công");
+        dispatch(removeCartProduct({ idProduct }));
+      }
+    } catch (error) {
+      console.error("Failed to delete product", error);
     }
-  };
-  const recurseDecrease = () => {
-    if (user?.id) {
-      UserSerVice.updateUserCart(
-        user?.id,
-        props?.product,
-        amount - 1,
-        user?.access_token
-      );
-    } else {
-      recurseDecrease();
-    }
-  };
-  const handleDeleteProductinCart = (id, idProduct) => {
-    dispatch(removeCartProduct({ idProduct }));
-    UserSerVice.deleteUserCart(id, idProduct, user?.access_token);
   };
 
   return (
@@ -88,12 +96,7 @@ const CardCart = ({ props }) => {
             <button
               id="cartDecreaseBtn"
               onClick={() =>
-                handleChangeCount(
-                  "decrease",
-                  props?.product,
-
-                  props?.amount === 1
-                )
+                handleChangeCount("decrease", props?._id, amount === 1)
               }
             >
               -
@@ -102,11 +105,7 @@ const CardCart = ({ props }) => {
             <button
               id="cartIncreaseBtn"
               onClick={() =>
-                handleChangeCount(
-                  "increase",
-                  props?.product,
-                  props?.amount === 50
-                )
+                handleChangeCount("increase", props?._id, amount === 50)
               }
             >
               +
@@ -118,7 +117,7 @@ const CardCart = ({ props }) => {
           <AiOutlineDelete
             size="2rem"
             color="red"
-            onClick={() => handleDeleteProductinCart(user?.id, props?.product)}
+            onClick={() => handleDeleteProductinCart(user?.id, props?._id)}
           />
         </div>
       </div>

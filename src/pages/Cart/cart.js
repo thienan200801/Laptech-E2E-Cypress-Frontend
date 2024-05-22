@@ -10,12 +10,13 @@ const cx = classNames.bind(styles);
 const Cart = () => {
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
+  console.log("cart", cart);
 
   const navigate = useNavigate();
   const numberFormat = new Intl.NumberFormat("en-US");
 
   const handlePayment = () => {
-    if (cart.products.length === 0) {
+    if (cart?.products?.length === 0) {
       alert("Không có sản phẩm nào trong giỏ hàng");
       return;
     } else {
@@ -35,9 +36,9 @@ const Cart = () => {
             <p style={{ flex: 1 }}>Thành tiền</p>
             <p style={{ flex: 0.5 }}>Xóa</p>
           </div>
-          {cart.products.length !== 0 ? (
+          {cart?.products && cart?.products?.length > 0 ? (
             cart.products?.map((item, index) => {
-              return <CardCart key={index} props={item}/>;
+              return <CardCart key={index} props={item} />;
             })
           ) : (
             <div className={cx("empty")}>
@@ -48,15 +49,22 @@ const Cart = () => {
         <div className={cx("firm")} id="cartInfoContainer">
           <div className={cx("price-content")}>
             <div className={cx("location")}>
-              <p id="cartAddress">Địa chỉ: {user.address ? user.address : "empty"} </p>
+              <p id="cartAddress">
+                Địa chỉ: {user.address ? user.address : "empty"}{" "}
+              </p>
             </div>
             <div className={cx("phone")}>
-              <p id="cartPhoneNumber">Số điện thoại: {user.phone ? user.phone : "empty"} </p>
+              <p id="cartPhoneNumber">
+                Số điện thoại: {user.phone ? user.phone : "empty"}{" "}
+              </p>
             </div>
             <div className={cx("price-detail")} id="priceDetails">
               <lable className={cx("lable")} id="subTotal">
                 Tạm tính:
-                <lable>{numberFormat.format(cart?.cartTotal)}VNĐ</lable>
+                <lable>
+                  {cart?.cartTotal ? numberFormat.format(cart?.cartTotal) : 0}
+                  VNĐ
+                </lable>
               </lable>
               <lable className={cx("lable")} id="discount">
                 Giảm giá:
@@ -70,7 +78,7 @@ const Cart = () => {
             <div className={cx("price-total")} id="total">
               <p>Tổng cộng:</p>
               <p className={cx("total")}>
-                {numberFormat.format(cart?.cartTotal)}VNĐ
+                {cart?.cartTotal ? numberFormat.format(cart?.cartTotal) : 0}VNĐ
               </p>
             </div>
           </div>

@@ -206,7 +206,7 @@ const Order = () => {
   //Fetch ALL data
   const fetchOrderAll = async () => {
     try {
-      const res = await OrderService.getAllOrder();
+      const res = await OrderService.getAllOrder(user?.access_token);
       return res;
     } catch (error) {
       console.error("Error fetching data:", error);
