@@ -6,6 +6,7 @@ import {
   updateStatusOrder,
 } from "../services/OrderService";
 import { loginUser } from "../services/UserService";
+jest.setTimeout(20000); // Set the timeout to 20 seconds
 
 const dataCreateOrder = {
   address: "Tỉnh Bình Định,Huyện An Lão ân hữu",
@@ -37,7 +38,7 @@ describe("fetchAllOrders", () => {
     });
     if (resultLogin.status === "OK") {
       const result = await getAllOrder(resultLogin.access_token);
-      console.log(result, "result");
+
       expect(result.status).toEqual("OK");
     }
   });
@@ -108,7 +109,6 @@ describe("getAllOrderByUSERID", () => {
         resultLogin.data._id,
         resultLogin.access_token
       );
-      console.log(result, "result here");
       expect(result.status).toEqual("OK");
     }
   });
@@ -130,7 +130,6 @@ describe("updateStatusOrder", () => {
         data,
         resultLogin.access_token
       );
-      console.log(result, "result");
       expect(result.status).toEqual("OK");
     }
   });

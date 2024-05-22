@@ -69,7 +69,6 @@ export const getAllOrder = async (access_token) => {
 };
 
 export const updateStatusOrder = async (id, data, access_token) => {
-  console.log(id, "id");
   const res = await axiosJWT.put(
     `http://localhost:5000/api/order/update-status-order/${id}`,
     data,

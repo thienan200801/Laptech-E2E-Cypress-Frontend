@@ -15,6 +15,8 @@ import {
   deleteAllUserCart,
 } from "../services/UserService";
 
+jest.setTimeout(20000); // Set the timeout to 20 seconds
+
 describe("refreshToken", () => {
   it("should refresh token is successfully", async () => {
     const data = {

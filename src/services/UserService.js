@@ -3,7 +3,6 @@ import axios from "axios";
 export const axiosJWT = axios.create();
 
 export const loginUser = async (data) => {
-  console.log("data", data);
   const res = await axios.post(`http://localhost:5000/api/user/login`, data);
   return res.data;
 };
@@ -65,7 +64,6 @@ export const logoutUser = async () => {
 };
 
 export const updateUser = async (id, data, access_token) => {
-  console.log("data", data);
   const res = await axiosJWT.put(
     `http://localhost:5000/api/user/update-user/${id}`,
     data,

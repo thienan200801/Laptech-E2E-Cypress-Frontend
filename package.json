@@ -53,7 +53,8 @@
     "jest": "jest",
     "testUser": "jest UserService.test.js",
     "testProduct": "jest ProductService.test.js",
-    "testOrder": "jest OrderService.test.js"
+    "testOrder": "jest OrderService.test.js",
+    "testProvinces": "jest AppService.test.js"
   },
   "eslintConfig": {
     "extends": [
