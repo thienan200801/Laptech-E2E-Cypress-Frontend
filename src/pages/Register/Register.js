@@ -185,7 +185,9 @@ const Register = () => {
                 Password
               </label>
             </div>
-            <button id="registerBtn" onClick={handleRegister}>Register</button>
+            <button id="registerBtn" onClick={handleRegister}>
+              Register
+            </button>
             <div className={cx("register-login")}>
               <p>
                 Have an account? <span onClick={handleLogin}>Login</span>

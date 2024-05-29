@@ -5,7 +5,7 @@ const endpoint = "http://localhost:5000/api";
 
 export const getAllProduct = async () => {
   const res = await axios.get(
-    `http://localhost:5000/api/product/get-all?page=1&limit=5`
+    `http://localhost:5000/api/product/get-all?page=10&limit=5`
   );
   return res.data;
 };

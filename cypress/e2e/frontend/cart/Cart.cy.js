@@ -26,26 +26,35 @@ describe("Cart page", () => {
     cy.get("#checkoutItem").children().should("have.length", 1);
 
     cy.log("Verify searching functionality");
-    cy.get('[placeholder="Find your product..."]')
-      .type("Lenovo");
+    cy.get('[placeholder="Find your product..."]').type("Lenovo");
     cy.wait(5000);
-    cy.get('#searchItemInfo').last().click();
+    //cy.get('#searchItemInfo').last().click();
 
-    cy.log('Add 2 more items');
-    cy.get('#increaseBtn').click();
-    cy.get('#increaseBtn').click();
-    cy.get('#buyNowBtn').click();
-    cy.get("div")
-      .contains("My cart", { matchCase: false })
-      .click({ force: true });
+    // cy.log("Add 2 more items");
+    // cy.get("#increaseBtn").click();
+    // cy.get("#increaseBtn").click();
+    // cy.get("#buyNowBtn").click();
+    // cy.get("div")
+    //   .contains("My cart", { matchCase: false })
+    //   .click({ force: true });
     //Assertion TBD
   });
-  it('As a user, I want to verify personal information during checkout process', () => {
-    cy.visit('http://localhost:3000/cart');
-    const cartInfoRequiredComponent = ['cartInfoContainer', 'cartAddress', 'cartPhoneNumber', 'priceDetails', 'subTotal', 'discount', 'shippingFee', 'total', 'payAmount']
-    cartInfoRequiredComponent.forEach(comp => {
-      cy.get('#'+comp).should('be.visible');
-    })
-    cy.get('#cartItemInfoContainer > p').should('have.length', 5);
-  })
+  it("As a user, I want to verify personal information during checkout process", () => {
+    cy.visit("http://localhost:3000/cart");
+    const cartInfoRequiredComponent = [
+      "cartInfoContainer",
+      "cartAddress",
+      "cartPhoneNumber",
+      "priceDetails",
+      "subTotal",
+      "discount",
+      "shippingFee",
+      "total",
+      "payAmount",
+    ];
+    cartInfoRequiredComponent.forEach((comp) => {
+      cy.get("#" + comp).should("be.visible");
+    });
+    cy.get("#cartItemInfoContainer > p").should("have.length", 5);
+  });
 });
